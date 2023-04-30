@@ -1,3 +1,33 @@
+# Global Chart Watchers
+
+WIP website to see charts and streaming data from all over the world
+
+---- 
+## Frontend
+Frontend is created using React JS
+
+to run frontend:
+- cd into frontend directory
+- `npm start`
+
+---
+
+## Backend
+Backend is created using Flask
+
+To run backend:
+- `conda activate brooke`
+- cd into backend directory
+- `python server.py`
+
+#### API routes:
+something like ... 
+- /officialcharts/{country}
+- /streaming/{service}/{country}
+
+---
+
+## TODO/Roadmap
 Homepage will have the logo, a nav bar, a map, and a footer
 
 NavBar:
