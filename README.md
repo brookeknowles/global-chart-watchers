@@ -40,6 +40,7 @@ NavBar:
 - world charts (i.e. what the map will show)
 - artists (select an artist, see their streaming data, chart data, maybe a map or graph showing their global popularity or trends)
 - songs (same as above but for a particular song (or album))
+- inverse points list, where i rank the top 100 least popular (by all time points) 'hits' to hit #1 on BB
 
 Map:
 - click on each country to see their singles charts (add album charts later)
