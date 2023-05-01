@@ -35,6 +35,13 @@ function Map() {
       regionsSelectable: true,
       regionsSelectableOne: true,
       regionStyle: regionStyle,
+      onRegionTooltipShow(event, tooltip, code) {
+        tooltip.text(
+          `<h5>Country: ${tooltip.text()}` +
+          `<p class="text-xs">Blah Blah Blah in here should go chart data.</p>`,
+          true // Enables HTML
+        )
+      }
     });
 
     const handleResize = () => {
