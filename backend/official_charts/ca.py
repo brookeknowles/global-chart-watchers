@@ -1,22 +1,22 @@
-'''
-US chart data
-'''
+"""
+Canada chart data
+"""
 
 from flask import Blueprint
 from bs4 import BeautifulSoup
 import requests
 from typing import List, Dict, Union
 
-us_blueprint = Blueprint('us_chart', __name__)
+canada_blueprint = Blueprint('canada_chart', __name__)
 
-@us_blueprint.route('/officialcharts/us', methods=['GET'])
-def get_us_singles_chart() -> List[Dict[str, Union[str, int]]]:
+@canada_blueprint.route('/officialcharts/ca', methods=['GET'])
+def get_canada_singles_chart() -> List[Dict[str, Union[str, int]]]:
     """ 
-    Gets the data from the Billboard Hot 100 website, and then returns an object with all the relevant
-    information 
+    Gets the data from the Canadian Billboard Hot 100 website, and then returns an object 
+    with all the relevant information 
     """
 
-    url = "https://www.billboard.com/charts/hot-100/"
+    url = "https://www.billboard.com/charts/canadian-hot-100/"
     result = requests.get(url)
     soup = BeautifulSoup(result.text, "html.parser")
     soup.find("div", class_="lxml")

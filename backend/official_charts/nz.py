@@ -1,12 +1,20 @@
+"""
+New Zealand chart data
+"""
+
 from flask import Blueprint
 from bs4 import BeautifulSoup
 import requests
 from typing import List, Dict, Union
 
-nz_top_40_blueprint = Blueprint('nz_top_40', __name__)
+nz_blueprint = Blueprint('nz_chart', __name__)
 
-@nz_top_40_blueprint.route('/officialcharts/nz', methods=['GET'])
-def get_NZ_top_40() -> List[Dict[str, Union[str, int]]]:
+@nz_blueprint.route('/officialcharts/nz', methods=['GET'])
+def get_nz_singles_chart() -> List[Dict[str, Union[str, int]]]:
+    """ 
+    Gets the data from the NZTop40 website, and then returns an object with 
+    all the relevant information 
+    """
     url = "https://nztop40.co.nz/chart/singles"
     result = requests.get(url)
     soup = BeautifulSoup(result.text, "html.parser")
