@@ -1,10 +1,12 @@
 from flask import Flask
+from flask_cors import CORS
 from bs4 import BeautifulSoup
 import requests
 
 
 # Initializing flask app
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/officialcharts/nz')
 def get_NZ_top_40():
