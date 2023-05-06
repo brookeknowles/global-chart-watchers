@@ -1,51 +1,41 @@
 from flask import Flask
 from flask_cors import CORS
-from bs4 import BeautifulSoup
-import requests
-from typing import List, Dict, Union
+from typing import List, Dict
+from official_charts.nz import get_NZ_top_40, nz_top_40_blueprint
 
-
-# Initializing flask app
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/officialcharts/*": {"origins": "*"}})
+app.register_blueprint(nz_top_40_blueprint)
 
-@app.route('/officialcharts/nz')
-def get_NZ_top_40() -> List[Dict[str, Union[str, int]]]:
-    """ 
-    Gets the data from the NZTop40 website
 
-    Returns: List of dictionaries containing chart data, e.g.:
-    [
-        {
-            "Artist": "artistname",
-            "Position": 1,
-            "Track": "trackname"
-        },
-    ]
+@app.route('/officialcharts', methods=['GET'])
+def get_all_number_ones() -> List[Dict[str, str]]:
     """
+    This endpoint returns a list of dictionaries that represent the #1 song in each country
+    """
+    # TODO get rid of this dummy data and use the actual countries data
+    nz_data = get_NZ_top_40()  # Retrieve data from the NZ chart endpoint
 
-    url = "https://nztop40.co.nz/chart/singles"
-    result = requests.get(url)
-    soup = BeautifulSoup(result.text, "html.parser")
+    data = [
+                {
+                    "CountryCode": "NZ",
+                    "Artist": nz_data[0]['Artist'],
+                    "Track": nz_data[0]['Track']
+                },
+                {
+                    "CountryCode": "US",
+                    "Artist": "Artist 2",
+                    "Track": "Track 2"
+                },
+                {
+                    "CountryCode": "GB",
+                    "Artist": "Artist 3",
+                    "Track": "Track 3"
+                },
+            ]
+    return data
 
-    song_list_raw = soup.findAll("h2", {"class": "title"})
-    song_list = []
-    for element in song_list_raw:
-        song_list.append(element.string)
 
-    artist_list_raw = soup.findAll("h3", {"class": "artist"})
-    artist_list = []
-    for element in artist_list_raw:
-        artist_list.append(element.string)
-
-    position_list = [i for i in range(1, 40 + 1)]
-
-    chart_data = [{'Position': positions, 'Artist': artists, 'Track': songs} for positions, artists, songs in
-                             zip(position_list, artist_list, song_list)]
-
-    return chart_data
-
-	
 # Running app
 if __name__ == '__main__':
 	app.run(debug=True)

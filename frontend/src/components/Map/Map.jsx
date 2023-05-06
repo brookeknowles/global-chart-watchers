@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./Map.css";
 import jsVectorMap from "jsvectormap";
 import "jsvectormap/dist/maps/world-merc.js";
+import { fetchChartData } from "./chartData";
 
 function Map() {
   const mapRef = useRef(null);
@@ -9,19 +10,12 @@ function Map() {
   const [chartData, setChartData] = useState(null);
 
   useEffect(() => {
-    const fetchChartData = async () => {
-      try {
-        const response = await fetch("http://127.0.0.1:5000/officialcharts/nz");
-        const data = await response.json();
-        if (Array.isArray(data) && data.length > 0) {
-          setChartData(data[0]);
-        }
-      } catch (error) {
-        console.error("Error fetching chart data:", error);
-      }
+    const fetchData = async () => {
+      const data = await fetchChartData();
+      setChartData(data);
     };
 
-    fetchChartData();
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -55,16 +49,15 @@ function Map() {
       onRegionTooltipShow(event, tooltip, code) {
         const countryName = tooltip.text();
         let tooltipContent = `<h5>Country: ${countryName}</h5>`;
-      
-        if (chartData && code === "NZ") {
-          tooltipContent += `<p class="text-xs">Artist: ${chartData.Artist}</p>`;
-          tooltipContent += `<p class="text-xs">Position: ${chartData.Position}</p>`;
-          tooltipContent += `<p class="text-xs">Track: ${chartData.Track}</p>`;
+
+        if (chartData && chartData[code]) {
+          const { Artist, Track } = chartData[code];
+          tooltipContent += `<p class="text-xs">Artist: ${Artist}</p>`;
+          tooltipContent += `<p class="text-xs">Track: ${Track}</p>`;
         }
-      
+
         tooltip.text(tooltipContent, true); // Update tooltip content with HTML
       }
-      
     });
 
     const handleResize = () => {
