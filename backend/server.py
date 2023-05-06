@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from bs4 import BeautifulSoup
 import requests
+from typing import List, Dict, Union
 
 
 # Initializing flask app
@@ -9,9 +10,19 @@ app = Flask(__name__)
 CORS(app)
 
 @app.route('/officialcharts/nz')
-def get_NZ_top_40():
-    """ Gets the data from the NZTop40 website, and then returns an object with all the relevant
-        information """
+def get_NZ_top_40() -> List[Dict[str, Union[str, int]]]:
+    """ 
+    Gets the data from the NZTop40 website
+
+    Returns: List of dictionaries containing chart data, e.g.:
+    [
+        {
+            "Artist": "artistname",
+            "Position": 1,
+            "Track": "trackname"
+        },
+    ]
+    """
 
     url = "https://nztop40.co.nz/chart/singles"
     result = requests.get(url)
