@@ -1,6 +1,6 @@
 # Global Chart Watchers
 
-WIP website to see charts and streaming data from all over the world
+WIP website/hobby project to see charts and streaming data from all over the world.
 
 ---- 
 ## Frontend
@@ -21,18 +21,15 @@ To run backend:
 - `python server.py`
 
 #### API routes:
-something like ... 
 - /officialcharts/{country}
-- /streaming/{service}/{country}
-
+    - currently only NZ is done
 ---
 
 ## TODO/Roadmap
-Homepage will have the logo, a nav bar, a map, and a footer
 
-NavBar:
 - Streaming site data
     - Spotify
+    - Apple music
     - Youtube
     - Melon
     - Ganaa
@@ -43,4 +40,9 @@ NavBar:
 - inverse points list, where i rank the top 100 least popular (by all time points) 'hits' to hit #1 on BB
 
 Map:
-- click on each country to see their singles charts (add album charts later)
+- hover over a country to see their singles charts (add album charts later)
+- click on several countries to see a breakdown comparison
+
+Backend: 
+- instead of scraping data when endpoint is hit, maybe have a database that is only updated once a week or something
+- Should probs look into legality of web scraping lolz
