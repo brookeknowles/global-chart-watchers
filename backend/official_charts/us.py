@@ -1,15 +1,13 @@
-'''
+"""
 US chart data
-'''
+"""
 
-from flask import Blueprint
-from bs4 import BeautifulSoup
+from typing import Dict, List, Union
+
 import requests
-from typing import List, Dict, Union
+from bs4 import BeautifulSoup
 
-us_blueprint = Blueprint('us_chart', __name__)
 
-@us_blueprint.route('/officialcharts/us', methods=['GET'])
 def get_us_singles_chart() -> List[Dict[str, Union[str, int]]]:
     """ 
     Gets the data from the Billboard Hot 100 website, and then returns an object with all the relevant

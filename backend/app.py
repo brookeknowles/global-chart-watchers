@@ -1,38 +1,24 @@
-from typing import List, Dict
+import requests
+from typing import Dict, List
 
-from flask import Flask, jsonify, request
+from flask import Flask, Response, jsonify
 from flask_cors import CORS
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
 
-from official_charts.au import get_australia_singles_chart, australia_blueprint
-from official_charts.ca import get_canada_singles_chart, canada_blueprint
-from official_charts.ie import get_ireland_singles_chart, ireland_blueprint
-from official_charts.nz import get_nz_singles_chart, nz_blueprint
-from official_charts.uk import get_uk_singles_chart, uk_blueprint
-from official_charts.us import get_us_singles_chart, us_blueprint
+from firebase_utils import db
+from official_charts.au import get_australia_singles_chart
+from official_charts.ca import get_canada_singles_chart
+from official_charts.ie import get_ireland_singles_chart
+from official_charts.nz import get_nz_singles_chart
+from official_charts.uk import get_uk_singles_chart
+from official_charts.us import get_us_singles_chart
 
-
-# Firebase db setup
-cred = credentials.Certificate('global-chart-watchers-firebase-adminsdk-av0zu-8c70f19b28.json')
-firebase_admin.initialize_app(cred)
-db = firestore.client()
 
 # Flask setup
 app = Flask(__name__)
 CORS(app, resources={r"/officialcharts/*": {"origins": "*"}})
 
-# Register blueprints
-app.register_blueprint(nz_blueprint)
-app.register_blueprint(australia_blueprint)
-app.register_blueprint(us_blueprint)
-app.register_blueprint(canada_blueprint)
-app.register_blueprint(ireland_blueprint)
-app.register_blueprint(uk_blueprint)
 
-
-def update_chart_data():
+def update_chart_data() -> None:
     """
     Updates the chart data in the Cloud Firestore database.
     """
@@ -76,13 +62,19 @@ def get_all_number_ones() -> List[Dict[str, str]]:
             for country in chart_data
         ]
     else:
+        # Call the update_charts endpoint to update the chart data
+        response = requests.post('http://127.0.0.1:5000/updatecharts')
+        if response.status_code == 200:
+            return response.json()
+
         data = []
 
     return jsonify(data)
 
 
+
 @app.route('/updatecharts', methods=['POST'])
-def update_charts():
+def update_charts() -> Response:
     """
     This endpoint triggers the update of chart data in the Cloud Firestore database.
     """

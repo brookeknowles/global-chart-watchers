@@ -25,3 +25,6 @@ yarn-error.log*
 
 # firebase credentials
 /backend/global-chart-watchers-firebase-adminsdk-*.json
+
+# pycache
+__pycache__/

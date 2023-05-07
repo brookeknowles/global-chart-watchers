@@ -2,14 +2,12 @@
 UK chart data
 """
 
-from flask import Blueprint
-from bs4 import BeautifulSoup
+from typing import Dict, List, Union
+
 import requests
-from typing import List, Dict, Union
+from bs4 import BeautifulSoup
 
-uk_blueprint = Blueprint('uk_chart', __name__)
 
-@uk_blueprint.route('/officialcharts/uk', methods=['GET'])
 def get_uk_singles_chart() -> List[Dict[str, Union[str, int]]]:
     """ 
     Gets the data from the Ireland top 50 website, and then returns an object with 

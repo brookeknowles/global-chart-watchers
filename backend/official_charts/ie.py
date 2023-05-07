@@ -2,14 +2,12 @@
 Ireland chart data
 """
 
-from flask import Blueprint
-from bs4 import BeautifulSoup
+from typing import Dict, List, Union
+
 import requests
-from typing import List, Dict, Union
+from bs4 import BeautifulSoup
 
-ireland_blueprint = Blueprint('ireland_chart', __name__)
 
-@ireland_blueprint.route('/officialcharts/ie', methods=['GET'])
 def get_ireland_singles_chart() -> List[Dict[str, Union[str, int]]]:
     """ 
     Gets the data from the Ireland top 50 website, and then returns an object with 

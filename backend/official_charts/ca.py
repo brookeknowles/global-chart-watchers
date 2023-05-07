@@ -2,14 +2,12 @@
 Canada chart data
 """
 
-from flask import Blueprint
-from bs4 import BeautifulSoup
+from typing import Dict, List, Union
+
 import requests
-from typing import List, Dict, Union
+from bs4 import BeautifulSoup
 
-canada_blueprint = Blueprint('canada_chart', __name__)
 
-@canada_blueprint.route('/officialcharts/ca', methods=['GET'])
 def get_canada_singles_chart() -> List[Dict[str, Union[str, int]]]:
     """ 
     Gets the data from the Canadian Billboard Hot 100 website, and then returns an object 

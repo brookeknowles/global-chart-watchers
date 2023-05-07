@@ -2,14 +2,12 @@
 New Zealand chart data
 """
 
-from flask import Blueprint
-from bs4 import BeautifulSoup
+from typing import Dict, List, Union
+
 import requests
-from typing import List, Dict, Union
+from bs4 import BeautifulSoup
 
-nz_blueprint = Blueprint('nz_chart', __name__)
 
-@nz_blueprint.route('/officialcharts/nz', methods=['GET'])
 def get_nz_singles_chart() -> List[Dict[str, Union[str, int]]]:
     """ 
     Gets the data from the NZTop40 website, and then returns an object with 

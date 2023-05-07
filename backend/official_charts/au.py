@@ -2,14 +2,12 @@
 Australia chart data
 """
 
-from flask import Blueprint
-from bs4 import BeautifulSoup
+from typing import Dict, List, Union
+
 import requests
-from typing import List, Dict, Union
+from bs4 import BeautifulSoup
 
-australia_blueprint = Blueprint('australia_chart', __name__)
 
-@australia_blueprint.route('/officialcharts/au', methods=['GET'])
 def get_australia_singles_chart() -> List[Dict[str, Union[str, int]]]:
     """ 
     Gets the data from the ARIA top 50 singles website, and then returns an object with all the relevant
