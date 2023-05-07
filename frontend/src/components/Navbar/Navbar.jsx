@@ -1,7 +1,20 @@
 import React from "react";
+import axios from "axios";
 import './Navbar.css';
 
 function Navbar() {
+    const handleRefreshChartData = () => {
+        axios.post("http://127.0.0.1:5000/updatecharts")
+            .then((response) => {
+            console.log(response.data.message);
+            // Handle success, e.g., show a success message to the user
+            })
+            .catch((error) => {
+            console.error(error);
+            // Handle error, e.g., show an error message to the user
+            });
+    };
+
     return (
         <nav className="navbar">
             <ul>
@@ -13,7 +26,7 @@ function Navbar() {
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Streaming</a></li>
                 <li><a href="#">Official Charts</a></li>
-                <li><a href="#">Artists</a></li>
+                <li><button onClick={handleRefreshChartData}>Refresh Chart Data</button></li>
             </ul>
         </nav>
     )

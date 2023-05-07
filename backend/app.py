@@ -7,6 +7,7 @@ from flask_cors import CORS
 from firebase_utils import db
 from official_charts.au import get_australia_singles_chart
 from official_charts.ca import get_canada_singles_chart
+from official_charts.fr import get_france_singles_chart
 from official_charts.ie import get_ireland_singles_chart
 from official_charts.nz import get_nz_singles_chart
 from official_charts.uk import get_uk_singles_chart
@@ -28,6 +29,7 @@ def update_chart_data() -> None:
     ca_data = get_canada_singles_chart()
     ie_data = get_ireland_singles_chart()
     uk_data = get_uk_singles_chart()
+    fr_data = get_france_singles_chart()
 
     chart_data = {
         'NZ': nz_data[0],
@@ -35,7 +37,8 @@ def update_chart_data() -> None:
         'AU': au_data[0],
         'CA': ca_data[0],
         'IE': ie_data[0],
-        'GB': uk_data[0]
+        'GB': uk_data[0],
+        'FR': fr_data[0],
     }
 
     # Store chart data in Cloud Firestore
@@ -79,6 +82,12 @@ def update_charts() -> Response:
     This endpoint triggers the update of chart data in the Cloud Firestore database.
     """
     update_chart_data()
+    
+    # Make the GET request to update the data on the frontend
+    response = requests.get('http://127.0.0.1:5000/officialcharts')
+    if response.status_code == 200:
+        return response.json()
+    
     return jsonify({'message': 'Chart data updated successfully.'})
 
 
