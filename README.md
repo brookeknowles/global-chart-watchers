@@ -16,13 +16,17 @@ to run frontend:
 Backend is created using Flask
 
 To run backend:
-- `conda activate brooke`
+- `conda activate global-chart-watchers`
 - cd into backend directory
-- `python server.py`
+- `python app.py`
+
+Database is firebase/cloud firestore
 
 #### API routes:
-- /officialcharts/{country}
-    - currently only NZ is done
+- GET /officialcharts
+    - retrieves data of #1 song and artist for each supported country
+- POST /updatecharts 
+    - updates the database with current chart information
 ---
 
 ## TODO/Roadmap
@@ -42,7 +46,3 @@ To run backend:
 Map:
 - hover over a country to see their singles charts (add album charts later)
 - click on several countries to see a breakdown comparison
-
-Backend: 
-- instead of scraping data when endpoint is hit, maybe have a database that is only updated once a week or something
-- Should probs look into legality of web scraping lolz
