@@ -1,19 +1,32 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 .map-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 65vh;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
+    overflow: hidden;
 }
 
 .jvm-container {
     height: 100%;
     width: 100%;
+    transform-origin: top left;
+    transition: transform 0.3s ease;
+}
+
+.country-clicked .jvm-container {
+    transform: scale(0.7);
 }
 
 .jvm-tooltip {
     border-radius: 3px;
     background-color: #3b82f6;
-    font-family: sans-serif,Verdana;
+    font-family: sans-serif, Verdana;
     font-size: smaller;
     box-shadow: 1px 2px 12px #0003;
     padding: 3px 5px;
@@ -22,4 +35,3 @@
     display: block;
     color: #fff;
 }
-

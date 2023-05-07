@@ -3,11 +3,14 @@ import "./Map.css";
 import jsVectorMap from "jsvectormap";
 import "jsvectormap/dist/maps/world-merc.js";
 import { fetchChartData } from "./chartData";
+import CountryPopup from "../CountryPopup/CountryPopup";
 
 function Map() {
   const mapRef = useRef(null);
   const map = useRef(null);
   const [chartData, setChartData] = useState(null);
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  const [isCountryClicked, setIsCountryClicked] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,6 +60,10 @@ function Map() {
         }
 
         tooltip.text(tooltipContent, true); // Update tooltip content with HTML
+      },
+      onRegionClick(event, code) {
+        setSelectedCountry(code);
+        setIsCountryClicked(true);
       }
     });
 
@@ -78,9 +85,22 @@ function Map() {
     };
   }, [chartData]);
 
+  const handleClosePopup = () => {
+    setSelectedCountry(null);
+    setIsCountryClicked(false);
+  };
+
   return (
-    <div className="map-container">
+    <div className={`map-container ${isCountryClicked ? "country-clicked" : ""}`}>
       <div className="jvm-container" ref={mapRef} />
+      {selectedCountry && (
+        <div className="popup-overlay">
+          <CountryPopup
+            countryCode={selectedCountry}
+            onClose={handleClosePopup}
+          />
+        </div>
+      )}
     </div>
   );
 }
