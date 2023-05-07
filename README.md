@@ -33,8 +33,8 @@ Database is firebase/cloud firestore
 
 - Streaming site data
     - Spotify
-    - Apple music
-    - Youtube
+    - Apple music 
+    - Youtube https://charts.youtube.com/charts/TopSongs/nz
     - Melon
     - Ganaa
     - others...
