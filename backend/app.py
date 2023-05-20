@@ -5,13 +5,13 @@ from flask import Flask, Response, jsonify
 from flask_cors import CORS
 
 from firebase_utils import db
-from official_charts.au import get_australia_singles_chart
-from official_charts.ca import get_canada_singles_chart
-from official_charts.fr import get_france_singles_chart
-from official_charts.ie import get_ireland_singles_chart
-from official_charts.nz import get_nz_singles_chart
-from official_charts.uk import get_uk_singles_chart
-from official_charts.us import get_us_singles_chart
+from countries.au import get_australia_singles_chart
+from countries.ca import get_canada_singles_chart
+from countries.fr import get_france_singles_chart
+from countries.ie import get_ireland_singles_chart
+from countries.nz import get_nz_singles_chart
+from countries.uk import get_uk_singles_chart
+from countries.us import get_us_singles_chart
 
 
 # Flask setup

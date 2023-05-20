@@ -41,17 +41,10 @@
   font-size: 22px;
 }
 
-.spotify-icon {
-  width: 34px;
-  height: 34px;
-}
-
-.apple-icon {
-  width: 34px;
-  height: 34px;
-}
-
-.youtube-icon {
+.spotify-icon,
+.apple-icon,
+.youtube-icon
+ {
   width: 34px;
   height: 34px;
 }
