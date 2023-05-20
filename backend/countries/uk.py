@@ -7,6 +7,10 @@ from typing import Dict, List, Union
 import requests
 from bs4 import BeautifulSoup
 
+from streaming_data.apple_music import apple_music
+from streaming_data.spotify import spotify
+from streaming_data.youtube import youtube
+
 
 def get_uk_singles_chart() -> List[Dict[str, Union[str, int]]]:
     """ 
@@ -29,4 +33,16 @@ def get_uk_singles_chart() -> List[Dict[str, Union[str, int]]]:
     chart_data = [{'Position': position, 'Artist': artist, 'Track': song} for position, artist, song in
                   zip(position_list, artist_list, song_list)]
 
+    return chart_data
+
+def get_uk_spotify_chart() -> List[Dict[str, Union[str, int]]]:
+    chart_data = spotify.get_spotify_chart("GB")
+    return chart_data
+
+def get_uk_apple_music_chart() -> List[Dict[str, Union[str, int]]]:
+    chart_data = apple_music.get_apple_music_charts("UK")
+    return chart_data
+
+def get_uk_youtube_chart() -> List[Dict[str, Union[str, int]]]:
+    chart_data = youtube.get_youtube_charts("UK")
     return chart_data

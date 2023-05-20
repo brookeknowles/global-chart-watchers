@@ -1,8 +1,8 @@
 from typing import List, Dict, Union
 import requests
 
-from playlist_ids import playlist_ids
-from secrets import spotify_client_id, spotify_client_secret
+from .playlist_ids import playlist_ids
+from .secrets import spotify_client_id, spotify_client_secret
 
 spotify_url = 'https://api.spotify.com/v1/'
 token_url = 'https://accounts.spotify.com/api/token'

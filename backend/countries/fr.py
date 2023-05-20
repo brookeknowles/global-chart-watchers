@@ -7,10 +7,10 @@ from typing import Dict, List, Union
 import requests
 from bs4 import BeautifulSoup
 
+from streaming_data.apple_music import apple_music
+from streaming_data.spotify import spotify
+from streaming_data.youtube import youtube
 
-from typing import List, Dict, Union
-import requests
-from bs4 import BeautifulSoup
 
 def get_france_singles_chart() -> List[Dict[str, Union[str, int]]]:
     """ 
@@ -32,3 +32,14 @@ def get_france_singles_chart() -> List[Dict[str, Union[str, int]]]:
 
     return chart_data
 
+def get_france_spotify_chart() -> List[Dict[str, Union[str, int]]]:
+    chart_data = spotify.get_spotify_chart("FR")
+    return chart_data
+
+def get_france_apple_music_chart() -> List[Dict[str, Union[str, int]]]:
+    chart_data = apple_music.get_apple_music_charts("FR")
+    return chart_data
+
+def get_france_youtube_chart() -> List[Dict[str, Union[str, int]]]:
+    chart_data = youtube.get_youtube_charts("FR")
+    return chart_data

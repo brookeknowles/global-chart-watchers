@@ -27,7 +27,7 @@ yarn-error.log*
 /backend/global-chart-watchers-firebase-adminsdk-*.json
 
 # spotify tokens
-/backend/spotify/secrets.py
+/backend/streaming_data/spotify/secrets.py
 
 # pycache
 __pycache__/
