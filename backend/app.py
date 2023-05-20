@@ -51,8 +51,14 @@ from countries.us import (
 
 # Flask setup
 app = Flask(__name__)
-CORS(app, resources={r"/officialcharts/*": {"origins": "*"}})
-
+CORS(app, resources={
+    r"/numberones/*": {"origins": "*"},
+    r"/officialcharts/*": {"origins": "*"},
+    r"/spotify/*": {"origins": "*"},
+    r"/applemusic/*": {"origins": "*"},
+    r"/youtube/*": {"origins": "*"},
+    r"/countrypopup/*": {"origins": "*"},
+})
 
 def update_chart_data() -> None:
     """
@@ -145,7 +151,7 @@ def update_chart_data() -> None:
         'FR': fr_youtube_data,
     }
 
-    country_card_data = {
+    country_popup_data = {
         'NZ': {
             'official': nz_official_chart_data[:3],
             'spotify': nz_spotify_data[:3],
@@ -206,12 +212,11 @@ def update_chart_data() -> None:
     doc_ref_youtube_charts = db.collection('charts').document('youtube_charts')
     doc_ref_youtube_charts.set(youtube_charts)
 
-    doc_ref_country_card_data = db.collection('charts').document('country_card_data')
-    doc_ref_country_card_data.set(country_card_data)
+    doc_ref_country_popup_data = db.collection('charts').document('country_popup_data')
+    doc_ref_country_popup_data.set(country_popup_data)
 
 
-
-@app.route('/officialcharts', methods=['GET'])
+@app.route('/numberones', methods=['GET'])
 def get_all_number_ones() -> List[Dict[str, str]]:
     """
     This endpoint returns a list of dictionaries that represent the #1 song in each country
@@ -240,6 +245,60 @@ def get_all_number_ones() -> List[Dict[str, str]]:
     return jsonify(data)
 
 
+@app.route('/officialcharts/<countryCode>', methods=['GET'])
+def get_official_charts(countryCode: str):
+    """
+    This endpoint returns a list of dictionaries that represent the official charts in requested country
+    """
+    # Retrieve chart data from Cloud Firestore for selected country
+    doc_ref = db.collection('charts').document('full_singles_charts')
+    chart_data = doc_ref.get().to_dict()[countryCode.upper()]
+    return jsonify(chart_data)
+
+
+@app.route('/spotify/<countryCode>', methods=['GET'])
+def get_spotify_charts(countryCode: str):
+    """
+    This endpoint returns a list of dictionaries that represent the spotify charts in requested country
+    """
+    # Retrieve chart data from Cloud Firestore for selected country
+    doc_ref = db.collection('charts').document('spotify_charts')
+    chart_data = doc_ref.get().to_dict()[countryCode.upper()]
+    return jsonify(chart_data)
+
+
+@app.route('/applemusic/<countryCode>', methods=['GET'])
+def get_apple_music_charts(countryCode: str):
+    """
+    This endpoint returns a list of dictionaries that represent the apple music charts in requested country
+    """
+    # Retrieve chart data from Cloud Firestore for selected country
+    doc_ref = db.collection('charts').document('apple_music_charts')
+    chart_data = doc_ref.get().to_dict()[countryCode.upper()]
+    return jsonify(chart_data)
+
+
+@app.route('/youtube/<countryCode>', methods=['GET'])
+def get_youtube_charts(countryCode: str):
+    """
+    This endpoint returns a list of dictionaries that represent the youtube charts in requested country
+    """
+    # Retrieve chart data from Cloud Firestore for selected country
+    doc_ref = db.collection('charts').document('youtube_charts')
+    chart_data = doc_ref.get().to_dict()[countryCode.upper()]
+    return jsonify(chart_data)
+
+
+@app.route('/countrypopup/<countryCode>', methods=['GET'])
+def get_country_popup_data(countryCode: str):
+    """
+    This endpoint returns the top 3 songs on each chart for a given country to display in the popup
+    """
+    # Retrieve chart data from Cloud Firestore for selected country
+    doc_ref = db.collection('charts').document('country_popup_data')
+    popup_data = doc_ref.get().to_dict()[countryCode.upper()]
+    return jsonify(popup_data)
+
 
 @app.route('/updatecharts', methods=['POST'])
 def update_charts() -> Response:
@@ -248,10 +307,34 @@ def update_charts() -> Response:
     """
     update_chart_data()
     
-    # Make the GET request to update the data on the frontend
-    response = requests.get('http://127.0.0.1:5000/officialcharts')
-    if response.status_code == 200:
-        return response.json()
+    # Make the GET requests to update the data on the frontend
+    endpoints = [
+        'numberones',
+        'officialcharts',
+        'spotify',
+        'applemusic',
+        'youtube',
+        'countrypopup',
+    ]
+    supported_countries = [
+        "au",
+        "ca",
+        "fr",
+        "ie",
+        "nz",
+        "gb",
+        "us"
+    ]
+    for endpoint in endpoints:
+        if endpoint != "numberones":
+            for country in supported_countries:
+                response = requests.get(f"http://127.0.0.1:5000/{endpoint}/{country}")
+                if response.status_code == 200:
+                    return response.json()
+        else:
+            response = requests.get(f"http://127.0.0.1:5000/{endpoint}")
+            if response.status_code == 200:
+                return response.json()
     
     return jsonify({'message': 'Chart data updated successfully.'})
 
