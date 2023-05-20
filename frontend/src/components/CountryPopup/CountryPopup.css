@@ -1,10 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
 .country-popup {
+  font-family: 'Inter', sans-serif;
   position: absolute;
   top: 0;
   right: 0;
   height: 91%;
   width: 33.33%;
-  max-width: 400px; /* Adjust the maximum width as needed */
+  max-width: 400px;
   padding: 20px;
   background-color: #F5F5F5;
   border: 1px solid #ccc;
@@ -12,12 +15,6 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-}
-  
-.country-popup h2 {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
 }
   
 .country-popup .close-btn {
@@ -34,4 +31,57 @@
   flex: 1;
   overflow-y: auto;
 }
-  
+
+.country-popup .country-name {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 22px;
+}
+
+.spotify-icon {
+  width: 34px;
+  height: 34px;
+}
+
+.apple-icon {
+  width: 34px;
+  height: 34px;
+}
+
+.youtube-icon {
+  width: 34px;
+  height: 34px;
+}
+
+.spotify-container,
+.apple-music-container,
+.youtube-container,
+.official-top3-container {
+  display: flex;
+  align-items: center;
+  margin-top: -5px;
+  margin-bottom: -5px;
+}
+
+.icon-container {
+  margin-right: 10px;
+  margin-top: 2px;
+}
+
+.official-chart-title,
+.streaming-title {
+  font-size: 20px;
+  margin-top: 2px;
+  margin-bottom: 2px
+}
+
+.line {
+  height: 1px;
+  background-color: #ccc;
+  width: 100%;
+  margin-bottom: 0;
+  margin-top: 0;
+}

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./Map.css";
 import jsVectorMap from "jsvectormap";
 import "jsvectormap/dist/maps/world-merc.js";
-import { fetchChartData } from "./chartData";
+import { fetchChartData } from "./chartData.js";
 import CountryPopup from "../CountryPopup/CountryPopup";
 
 function Map() {
