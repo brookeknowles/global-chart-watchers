@@ -1,0 +1,2 @@
+spotify_client_id = '241e3de1444c49faa8e6d0fc33978b7e'
+spotify_client_secret = 'fc89bff549c34f61a8b5e42d8704c812'
