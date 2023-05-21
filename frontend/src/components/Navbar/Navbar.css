@@ -1,11 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
 .navbar {
+    font-family: 'Inter', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background-color: #fff;
     width: 100%;
-    padding: 10px;
+    padding: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
 }
 
 .navbar ul {
@@ -24,6 +28,21 @@
 }
 
 .navbar a:hover {
-    color: red;
+    color: #8338EC;
 }
+
+.button {
+    background-color: #04080F;
+    color: #8338EC;
+    border-radius: 5px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+  }
+  
+  .button:hover {
+    background-color: #00E8FC;
+  }
   

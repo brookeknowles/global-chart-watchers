@@ -1,39 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Map from "./components/Map/Map";
 import Footer from "./components/Footer/Footer";
 import CountryPopup from "./components/CountryPopup/CountryPopup";
+import OfficialCharts from "./components/OfficialChartsPage/OfficialChartsPage";
 import "./App.css";
 
 function App() {
-  const [selectedCountry, setSelectedCountry] = useState(null);
-
-  const handleCountryClick = (countryName) => {
-    setSelectedCountry(countryName);
-  };
-
-  const handleClosePopup = () => {
-    setSelectedCountry(null);
-  };
-
   return (
-    <div className="App">
-      <Header />
-      <Navbar />
-      <div className="map-container">
-        <Map onCountryClick={handleCountryClick} />
+    <BrowserRouter>
+      <div className="App">
+        <Header />
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={Map} />
+          <Route path="/officialcharts" component={OfficialCharts} />
+        </Switch>
+        <Footer />
       </div>
-      <div className="country-popup-container">
-        {selectedCountry && (
-          <CountryPopup
-            countryName={selectedCountry}
-            onClose={handleClosePopup}
-          />
-        )}
-      </div>
-      <Footer />
-    </div>
+    </BrowserRouter>
   );
 }
 

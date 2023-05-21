@@ -49,6 +49,18 @@
   height: 34px;
 }
 
+.spotify-icon{
+  color: #1db954;
+}
+
+.apple-icon{
+  color: #fc3c44;
+}
+
+.youtube-icon{
+  color: #FF0000;
+}
+
 .spotify-container,
 .apple-music-container,
 .youtube-container,

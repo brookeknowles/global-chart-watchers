@@ -20,7 +20,7 @@ html, body {
 }
 
 .country-clicked .jvm-container {
-    transform: scale(0.7);
+    transform: scaleX(0.7);;
 }
 
 .jvm-tooltip {

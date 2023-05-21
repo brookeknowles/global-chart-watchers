@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import './Navbar.css';
 
 function Navbar() {
@@ -23,10 +24,10 @@ function Navbar() {
                 - turn the href hashtags into actual urls e.g. /streaming 
                 - add more options to navbar
                 */}
-                <li><a href="#">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="#">Streaming</a></li>
-                <li><a href="#">Official Charts</a></li>
-                <li><button onClick={handleRefreshChartData}>Refresh Chart Data</button></li>
+                <li><Link to="/officialcharts">Official Charts</Link></li>
+                <li><button className="button" onClick={handleRefreshChartData}>Refresh Chart Data</button></li>
             </ul>
         </nav>
     )

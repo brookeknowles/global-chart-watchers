@@ -26,7 +26,7 @@ function Map() {
 
     const regionStyle = {
       initial: {
-        fill: "white",
+        fill: "#8338EC",
         "fill-opacity": 1,
         stroke: "none",
         "stroke-width": 0,
@@ -37,7 +37,7 @@ function Map() {
         cursor: "pointer"
       },
       selected: {
-        fill: "red"
+        fill: "#00E8FC"
       },
       selectedHover: {}
     };
@@ -45,20 +45,18 @@ function Map() {
     map.current = new jsVectorMap({
       selector: mapElement,
       map: "world_merc",
-      backgroundColor: "grey",
+      backgroundColor: '#04080F',
       regionsSelectable: true,
       regionsSelectableOne: true,
       regionStyle: regionStyle,
       onRegionTooltipShow(event, tooltip, code) {
         const countryName = tooltip.text();
-        let tooltipContent = `<h5>Country: ${countryName}</h5>`;
+        let tooltipContent = `${countryName}`;
 
         if (chartData && chartData[code]) {
           const { Artist, Track } = chartData[code];
-          tooltipContent += `<p class="text-xs">Artist: ${Artist}</p>`;
-          tooltipContent += `<p class="text-xs">Track: ${Track}</p>`;
+          tooltipContent += `: ${Artist} - ${Track}`;
         }
-
         tooltip.text(tooltipContent, true); // Update tooltip content with HTML
       },
       onRegionClick(event, code) {

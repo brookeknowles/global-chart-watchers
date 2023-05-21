@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
+.official-charts-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: black;
+  background-color: black;
+  font-family: 'Inter', sans-serif;
+  padding-bottom: 20px;
+  font-weight: bold
+}
+
+.chart-title {
+  margin-top: 20px;
+  color: white;
+}
+
+table {
+  margin-top: 20px;
+  width: 1000%;
+  max-width: 600px;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid black;
+}
+
+tr:nth-child(even) {
+    background-color: #fff;
+}
+
+tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+select {
+  margin-top: 10px;
+}
