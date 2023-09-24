@@ -17,7 +17,7 @@ Currently supported countries:
 - USA
 
 ---- 
-## Frontend
+## 🌐 Frontend
 The frontend was created using React JS. 
 
 To run frontend:
@@ -27,7 +27,7 @@ To run frontend:
 - Navigate to `localhost:3000` in your favourite web browser
 ---
 
-## Backend
+## 💻 Backend
 The backend is created using Python/Flask
 
 To run backend:
@@ -37,5 +37,13 @@ To run backend:
 - Start python server: `python app.py`
 - The server will be running on `localhost:5000`
 
-When clicking on the 'refresh chart data' button in the frontend, the `/updatecharts` endpoint is called, which fetches the chart and streaming data from each of the supported countries (via web scraping with Beautiful Soup) and stores it on a Firestore NoSQL database. It then saves the data to the `/numberones`, `/officialcharts/{country}`, `/spotify/{country}`, `/applemusic/{country}`, `/youtube/{country}`, and `/countrypopup/{country}` endpoints for easy retrieval from the frontend. 
+When clicking on the 'refresh chart data' button in the frontend, the `/updatecharts` endpoint is called, which fetches the chart and streaming data from each of the supported countries (via web scraping with Beautiful Soup) and stores it in the database. It then saves the data to the `/numberones`, `/officialcharts/{country}`, `/spotify/{country}`, `/applemusic/{country}`, `/youtube/{country}`, and `/countrypopup/{country}` endpoints for easy retrieval from the frontend. 
 
+### Database
+The database used in this project is a Firebase firestore NoSQL database. To use this app you will need to create a Firebase account and install the admin SDK ([read the docs](https://firebase.google.com/docs/firestore/quickstart) for more info/instructions on this). After that's all set up, just replace line 10 of `backend/firebase_utils.py` with the path to your sdk: `cred = credentials.Certificate(path_to_sdk.json)`, and everything should be sweet to go from there!
+
+---
+## 🚧 Roadmap
+More countries will be added in due time, and I will likely add different streaming services in the markets where Spotify/AM/YT doesn't dominate as hard too. If you're reading this and interested, feel free to make a pull request to add any new countries. 
+
+Note that the chart data is retrieved through web scraping, so will only work as long as the websites I'm scraping from do not change their HTML structure 😅
