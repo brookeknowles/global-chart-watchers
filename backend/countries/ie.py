@@ -21,14 +21,13 @@ def get_ireland_singles_chart() -> List[Dict[str, Union[str, int]]]:
     result = requests.get(url)
     soup = BeautifulSoup(result.text, "html.parser")
 
-    song_list_raw = soup.select(".chart-positions .title-artist .title a")
+    song_list_raw = soup.findAll("a", {"class": "chart-name font-bold inline-block"})
     song_list = [element.get_text(strip=True) for element in song_list_raw]
 
-    artist_list_raw = soup.select(".chart-positions .title-artist .artist a")
+    artist_list_raw = soup.findAll("a", {"class": "chart-artist text-lg inline-block"})
     artist_list = [element.get_text(strip=True) for element in artist_list_raw]
 
-    position_list_raw = soup.select(".chart-positions .position")
-    position_list = [int(element.get_text(strip=True)) for element in position_list_raw]
+    position_list = position_list = [i for i in range(1, 50 + 1)]
 
     chart_data = [{'Position': position, 'Artist': artist, 'Track': song} for position, artist, song in
                   zip(position_list, artist_list, song_list)]
