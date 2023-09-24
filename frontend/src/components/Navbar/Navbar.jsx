@@ -19,14 +19,8 @@ function Navbar() {
     return (
         <nav className="navbar">
             <ul>
-                {/* 
-                TODO: 
-                - turn the href hashtags into actual urls e.g. /streaming 
-                - add more options to navbar
-                */}
                 <li><a href="/">Home</a></li>
-                <li><a href="#">Streaming</a></li>
-                <li><Link to="/officialcharts">Official Charts</Link></li>
+                <li><Link to="/officialcharts">Full Charts</Link></li>
                 <li><button className="button" onClick={handleRefreshChartData}>Refresh Chart Data</button></li>
             </ul>
         </nav>
