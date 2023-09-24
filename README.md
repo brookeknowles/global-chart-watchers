@@ -1,54 +1,41 @@
 # Global Chart Watchers
 
-WIP website/hobby project to see charts and streaming data from all over the world.
+This website lets you easily compare the biggest songs around the world on the official singles charts and the biggest streaming platforms (Spotify, Apple Music, YouTube). 
+
+Simply click on a country to see the top 3 songs from each platform, or just hover over a country to see the #1 single on the official singles charts. To see the entire official singles chart, click on the 'Full Charts' button. Use the 'Refresh Chart Data' button to update the website with the most up-to-date data. 
+
+![gcw-example](https://github.com/brookeknowles/global-chart-watchers/assets/62309663/f9d7aaeb-46d9-4996-bdb2-c456c6d61da1)
+
+
+Currently supported countries: 
+- Australia
+- Canada
+- France
+- Ireland
+- New Zealand
+- UK
+- USA
 
 ---- 
 ## Frontend
-Frontend is created using React JS
+The frontend was created using React JS. 
 
-to run frontend:
-- cd into frontend directory
-- `npm start`
-
+To run frontend:
+- Navigate to frontend directory: `cd frontend`
+- Install dependencies: `npm install`
+- Start frontend: `npm start`
+- Navigate to `localhost:3000` in your favourite web browser
 ---
 
 ## Backend
-Backend is created using Flask
+The backend is created using Python/Flask
 
 To run backend:
-- `conda activate global-chart-watchers`
-- cd into backend directory
-- `python app.py`
+- Install conda environment: `conda create -n <environment-name> --file req.txt`
+- Activate the environment: `conda activate <environment-name>`
+- Navigate to backend directory: `cd backend`
+- Start python server: `python app.py`
+- The server will be running on `localhost:5000`
 
-Database is firebase/cloud firestore
+When clicking on the 'refresh chart data' button in the frontend, the `/updatecharts` endpoint is called, which fetches the chart and streaming data from each of the supported countries (via web scraping with Beautiful Soup) and stores it on a Firestore NoSQL database. It then saves the data to the `/numberones`, `/officialcharts/{country}`, `/spotify/{country}`, `/applemusic/{country}`, `/youtube/{country}`, and `/countrypopup/{country}` endpoints for easy retrieval from the frontend. 
 
-#### API routes:
-- GET /numberones
-    - retrieves data of #1 song and artist for each supported country
-- POST /updatecharts 
-    - updates the database with current chart information
-- GET /officialcharts/{country}
-    - retreives official weekly singles chart for a specified country
-- GET /spotify/{country}
-    - retreives daily spotify chart for a specified country
-- GET /applemusic/{country}
-    - retreives weekly apple music chart for a specified country
-- GET /youtube/{country}
-    - retreives weekly youtube chart for a specified country
-- GET /countrypopup/{country}
-    - retreives the data to show on the popups 
----
-
-## TODO
-
-- Other/less common streaming site data
-    - Melon
-    - Ganaa
-    - others...
-
-- artists (select an artist, see their streaming data, chart data, maybe a map or graph showing their global popularity or trends)
-- songs (same as above but for a particular song (or album))
-- inverse points list, where i rank the top 100 least popular (by all time points) 'hits' to hit #1 on BB
-
-Map:
-- click on several countries to see a breakdown comparison
