@@ -1,9 +1,1 @@
-export const supportedCountries = [
-    "AU",
-    "CA",
-    "FR",
-    "IE",
-    "NZ",
-    "GB",
-    "US"
-];
+export const supportedCountries = ['AU', 'CA', 'FR', 'IE', 'NZ', 'GB', 'US']

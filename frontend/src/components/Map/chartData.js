@@ -28,21 +28,20 @@ e.g:
 */
 export const fetchChartData = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:5000/numberones");
-      const data = await response.json();
-      const chartData = {};
-  
-      if (Array.isArray(data)) {
-        data.forEach(item => {
-          const countryCode = item.CountryCode.toUpperCase();
-          chartData[countryCode] = item;
-        });
-      }
-  
-      return chartData;
+        const response = await fetch('http://127.0.0.1:5000/numberones')
+        const data = await response.json()
+        const chartData = {}
+
+        if (Array.isArray(data)) {
+            data.forEach((item) => {
+                const countryCode = item.CountryCode.toUpperCase()
+                chartData[countryCode] = item
+            })
+        }
+
+        return chartData
     } catch (error) {
-      console.error("Error fetching chart data:", error);
+        console.error('Error fetching chart data:', error)
     }
-    return null;
-  };
-  
+    return null
+}

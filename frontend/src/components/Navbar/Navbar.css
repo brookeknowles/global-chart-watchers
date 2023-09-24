@@ -28,21 +28,20 @@
 }
 
 .navbar a:hover {
-    color: #8338EC;
+    color: #8338ec;
 }
 
 .button {
-    background-color: #04080F;
-    color: #8338EC;
+    background-color: #04080f;
+    color: #8338ec;
     border-radius: 5px;
     padding: 10px 20px;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-weight: bold;
-  }
-  
-  .button:hover {
-    background-color: #00E8FC;
-  }
-  
+}
+
+.button:hover {
+    background-color: #00e8fc;
+}
